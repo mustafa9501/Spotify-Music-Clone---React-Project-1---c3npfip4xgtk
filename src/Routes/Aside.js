@@ -3,8 +3,11 @@ import IconText from "../InputComponent/shared/IconText";
 import spotify_logo from "../assets/images/spotify_logo_white.svg";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
+import { useUser } from './UserProvider';
 
 const Aside = () => {
+
+  const { getUser } = useUser();
 //   const location = useLocation();
 //  console.log(location)
   return (<>
@@ -38,15 +41,15 @@ const Aside = () => {
         <div className="bg-neutral-900 boder rounded-lg w-64 h-7/10 p-3 m-2 ">
           <div className="flex justify-between ">
             <div className="text-zinc-400 hover:text-white">
-              <IconText iconName={"ion:library"} displayText={"Your Library"} />
+              <Link to="/comingsoon"><IconText iconName={"ion:library"} displayText={"Your Library"} /></Link>
             </div>
             <div className="text-zinc-500 cursor-pointer text-3xl mt-2.5 hover:text-white">
               +
             </div>
           </div>
-          <div className="text-zinc-400 hover:text-white">
-            <IconText iconName={"mdi:heart"} displayText={"Liked Songs"} />
-          </div>
+          {getUser && getUser.status == "success" && <div className="text-zinc-400 hover:text-white">
+            <Link to='/likedsongs'><IconText iconName={"mdi:heart"} displayText={"Liked Songs"} /></Link> 
+          </div>}
           <div className="flex justify-between text-xs text-zinc-400 mt-20 cursor-pointer pl-2.5 font-medium">
             <h5>Legal</h5>
             <h5>Privacy Center</h5>
@@ -60,17 +63,13 @@ const Aside = () => {
           <div className="flex text-xs text-zinc-400 mt-5 cursor-pointer pl-2.5 font-medium">
             <h5>Cookies</h5>
           </div>
-          <div className="py-4 p-2.5">
+           <Link to="/comingsoon"><div className="py-4 p-2.5">
             <div className="mt-10 border rounded-full border-gray-700 text-white font-semibold flex w-2/4 justify-center items-center hover:border-white hover:scale-105 cursor-pointer">
               <Icon icon="lucide:globe" />
               <div className="p-1">English</div>
-            </div>
-        
-            {/* <AudioPlayer/> */}
-        
-          </div>
+            </div>        
+          </div></Link>
         </div>
-    {/* </div>     */}
     </>
   );
 };

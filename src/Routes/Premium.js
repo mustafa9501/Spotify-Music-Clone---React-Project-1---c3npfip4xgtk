@@ -11,13 +11,13 @@ const Premium = () => {
     localStorage.removeItem("token");
     signOutUser();
   }
+  
   return (
     <div className='bg-blue-600
      h-screen w-full'>
         <div className='w-full bg-zinc-900 flex items-center pl-8'>
         <Link to='/'><img src={spotify_logo} alt="spotify logo" width={140} /></Link>
-            {/* <Nav/> */}
-
+            
             <div className="navbar w-full h-18 bg-neutral-900 rounded-t-lg mt-2 mr-2 bg-opacity-70 flex justify-end items-center">
             
           <div className='flex justify-end items-center'>
@@ -41,13 +41,13 @@ const Premium = () => {
           </div></Link>}
           </div>
           </div>
-        </div>
+        </div> 
         <div className='text-white felx-col'>
             <h2 className='font-bold  text-center text-4xl mt-40'>Get Premium free for 1 month</h2>
             <h3 className='text-center mt-8 text-lg'>Just ₹119/month after. Debit and credit cards accepted. Canel anytime.</h3>
             <div className='flex justify-center gap-3 mt-8'>
-                <button className='bg-zinc-900 rounded-full px-5 py-3 font-semibold text-sm'>GET STARTED</button>
-                <button className='bg-transparent border rounded-full px-5 py-3 font-semibold text-sm'>SEE OTHER PLANS</button>
+                <button className='bg-zinc-900 rounded-full px-5 py-3 font-semibold text-sm hover:scale-105'>GET STARTED</button>
+                <button className='bg-transparent border rounded-full px-5 py-3 font-semibold text-sm hover:scale-105'>SEE OTHER PLANS</button>
             </div>
             <div className='text-xs mt-14 text-center'>Terms and conditions apply. 1 month free not available for those who already tried primuim.</div>
         </div>

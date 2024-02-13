@@ -27,14 +27,12 @@ const Footer = () => {
             <div className="text-zinc-400 text-sm font-medium cursor-pointer hover:underline hover:text-white mt-1.5">Free Mobile App</div> 
         </div>
       </div>
-        <div className="flex gap-8 mr-10 font-2xl mt-10">
-           <Link to="https://www.instagram.com/spotify/"><Icon icon="skill-icons:instagram"
-            width="2rem" height="2rem" className="hover:scale-110" />
+        <div className="flex gap-6 mr-10 font-2xl mt-10">
+           <Link to="https://www.instagram.com/spotify/"><Icon icon="ri:instagram-line" width="1.2rem" height="1.2rem"  style={{color: "white"}} className="bg-zinc-700 hover:bg-zinc-500 rounded-full h-10 w-10 p-2"/>
             </Link> 
-            <Link to="https://twitter.com/spotify"><Icon icon="skill-icons:twitter" width="2rem" height="2rem" className="hover:scale-110" />
+            <Link to="https://twitter.com/spotify"><Icon icon="ri:twitter-fill" width="1.2rem" height="1.2rem"  style={{color: 'white'}} className="bg-zinc-700 hover:bg-zinc-500 rounded-full h-10 w-10 p-2"/>
             </Link> 
-            <Link to="https://www.facebook.com/Spotify"><Icon icon="devicon:facebook"
-            width="2rem" height="2rem" className="hover:scale-110" />
+            <Link to="https://www.facebook.com/Spotify"><Icon icon="ic:round-facebook" width="1.2rem" height="1.2rem"  style={{color: 'white'}} className="bg-zinc-700 hover:bg-zinc-500 rounded-full h-10 w-10 p-2"/>
             </Link> 
         </div>
     </div>

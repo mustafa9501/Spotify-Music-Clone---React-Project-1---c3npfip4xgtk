@@ -2,13 +2,19 @@ import { createContext, useContext, useState } from "react";
 
 const UserContext = createContext();
 
+
 export const UserProvider = ({ children }) => {
+  
   const [getUser, setUser] = useState(
     localStorage.getItem("token")
       ? { token: localStorage.getItem("token"), status: "success" }
       : null
   );
   const[currentPlaying, setCurrentPlaying] = useState([]);
+  const[artistData, setArtistData] = useState([]);
+  const[albumData, setAlbumData] = useState([]);
+  const [list, setList] = useState([]);
+
 
   const signInUser = (input) => {
     setUser(input);
@@ -24,6 +30,12 @@ export const UserProvider = ({ children }) => {
     signOutUser,
     setCurrentPlaying,
     currentPlaying,
+    artistData,
+    setArtistData,
+    albumData,
+    setAlbumData,
+    list,
+    setList,
   };
 
   return (

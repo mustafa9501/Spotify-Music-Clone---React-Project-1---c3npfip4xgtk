@@ -7,8 +7,7 @@ import { UserProvider } from "./Routes/UserProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <UserProvider>
-    <App />
+       <App />
   </UserProvider>
-    
   
 );

@@ -53,6 +53,31 @@ const Home = () => {
     speed: 500,   
     slidesToShow: 4,
     slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1100,
+        settings: {
+          slidesToShow: 3,
+       
+        }
+      },
+      {
+        breakpoint: 968,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+       
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          arrows: false,
+      
+        }
+      }
+    ]
   };
 
   const handlePlaySortedSong = (song) => {
@@ -61,17 +86,17 @@ const Home = () => {
 
   return ( 
   <>
-    <div className="w-screen h-full block ">
-       <div className="flex h-9/10 w-screen">
-          <div className="w-1/5 h-10/12">
-           {/* This is left side component */}
-            <Aside/>
-          </div>
+    {/* <div className="w-screen h-full block "> */}
+       {/* <div className="flex h-9/10 w-screen"> */}
+         {/* This is left side component */}
+          {/* <div className="w-1/5 h-10/12">
+            {/* <Aside/> */}
+          {/* </div> */} 
             {/* This is right side component */}
-           <div className="w-4/5 h-full bg-black mb-3">
+           {/* <div className="w-4/5 h-full bg-black mb-3"> */}
 
                 {/* This is nav div */}
-                <Nav />
+                {/* <Nav /> */}
 
               {/* This is content div */}
               <div className="bg-neutral-900 h-9/10 overflow-y-auto rounded-b-lg">  
@@ -100,7 +125,7 @@ const Home = () => {
                         return (
                           <div key={index} onClick= {()=>{handlePlaySortedSong(obj)}}>
                             <Cards
-                              src={obj.thumbnail}
+                              src={obj.thumbnail}     
                               alt={obj.title}
                               title={obj.title}
                               subtitle={obj.artist[0].description}
@@ -111,11 +136,11 @@ const Home = () => {
                     </Slider> 
                     <div className="mt-16"><Footer /></div>
               </div>    
-            </div>
-       </div>
-       <div className="w-screen h-24 p-4 bg-black"> <AudioPlayer/></div> 
+            {/* </div> */}
+       {/* </div> */}
+       {/* <div className="w-screen h-24 p-4 bg-black"> <AudioPlayer/></div>  */}
                     
-    </div>
+    {/* </div> */}
 </>
   );
 };
