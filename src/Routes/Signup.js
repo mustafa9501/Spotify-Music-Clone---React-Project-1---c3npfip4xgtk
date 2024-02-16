@@ -42,7 +42,7 @@ const Signup = () => {
           alt="logo"
         /></Link>
       </div>
-      <div className="w-2/4 flex flex-col items-center">
+      <div className="xl:w-2/4 lg:w-2/4 md:w-2/4 sm flex flex-col items-center">
         <h1 className="text-white p-10 pt-12 text-3xl font-bold text-center">
           Sign up to start listening
         </h1>

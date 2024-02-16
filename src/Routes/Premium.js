@@ -46,8 +46,8 @@ const Premium = () => {
             <h2 className='font-bold  text-center text-4xl mt-40'>Get Premium free for 1 month</h2>
             <h3 className='text-center mt-8 text-lg'>Just ₹119/month after. Debit and credit cards accepted. Canel anytime.</h3>
             <div className='flex justify-center gap-3 mt-8'>
-                <button className='bg-zinc-900 rounded-full px-5 py-3 font-semibold text-sm hover:scale-105'>GET STARTED</button>
-                <button className='bg-transparent border rounded-full px-5 py-3 font-semibold text-sm hover:scale-105'>SEE OTHER PLANS</button>
+                <Link to="/support"><button className='bg-zinc-900 rounded-full px-5 py-3 font-semibold text-sm hover:scale-105'>GET STARTED</button></Link>
+                <Link to="/support"><button className='bg-transparent border rounded-full px-5 py-3 font-semibold text-sm hover:scale-105'>SEE OTHER PLANS</button></Link>
             </div>
             <div className='text-xs mt-14 text-center'>Terms and conditions apply. 1 month free not available for those who already tried primuim.</div>
         </div>

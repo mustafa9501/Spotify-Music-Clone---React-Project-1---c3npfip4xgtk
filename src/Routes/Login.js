@@ -49,7 +49,7 @@ const Login = () => {
           />
         </Link>
       </div>
-      <div className="bg-black w-2/4 mt-7 rounded-xl">
+      <div className="bg-black xl:w-2/4 lg:2/4 md:2/4 w-full mt-7 rounded-xl">
         <h1 className="text-white p-10 pt-16 text-4xl font-bold text-center">
           Log in to Spotify
         </h1>
