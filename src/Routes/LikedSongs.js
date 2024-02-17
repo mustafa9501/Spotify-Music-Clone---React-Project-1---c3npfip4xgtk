@@ -88,10 +88,10 @@ const LikedSongs = () => {
       {list && list.length > 0 ? (
         list.map((song, index) => (
           <div key={index} className="flex border-b text-zinc-400 border-gray-800 hover:bg-zinc-800 group hover:text-white">
-            <span className="p-3 mt-2 flex-shrink-0">{index + 1}</span>
+            <span className="p-3 mt-2 flex-shrink-0 lg:md:text-base text-sm">{index + 1}</span>
             <Icon icon="entypo:controller-play" width="4rem" height="4rem" style={{ color: '#72d95e' }} className='transform opacity-0 group-hover:opacity-100 mr-2 ' />
-            <img src={song.thumbnail} className="w-16 h-8 mt-1.5 rounded-md" alt={song.title} onClick={() => { handlePlaySortedSong(song) }} />
-            <div className="p-2 mt-2 w-5/6 " onClick={() => { handlePlaySortedSong(song) }}>{song.title}</div>
+            <img src={song.thumbnail} className=" h-14 mt-1.5 mb-1.5 rounded-md" alt={song.title} onClick={() => { handlePlaySortedSong(song) }} />
+            <div className="p-2 pl-4 mt-3.5 w-5/6 lg:md:text-base text-sm " onClick={() => { handlePlaySortedSong(song) }}>{song.title}</div>
             <div className="p-2 mt-2 w-full" onClick={() => { handlePlaySortedSong(song) }}>{song.artist[0].name}</div>
             <div className='disliked' onClick={() => removeLikedSongs(song._id)}>
               <Icon icon="ph:heart-fill" width="1.5rem" height="1.5rem" style={{ color: '#1ED760' }} className='mr-16 mt-2 md:mt-5 hover:scale-125 cursor-pointer' />
