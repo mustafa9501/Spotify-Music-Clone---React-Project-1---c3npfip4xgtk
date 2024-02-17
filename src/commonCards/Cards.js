@@ -20,10 +20,10 @@ export default function Cards({ src, title, subtitle, alt }) {
 
   return (
 
-    <Card className="mt-6 lg:w-48 w-40 bg-zinc-900 hover:bg-zinc-700 cursor-pointer ml-4 mr-2 drop-shadow-md overflow:visible group">
+    <Card className="mt-6 lg:w-48 w-36  bg-zinc-900 hover:bg-zinc-700 cursor-pointer ml-4 mr-2 drop-shadow-md overflow:visible group">
       {/* </div> */}
       <CardHeader color="blue-gray" className="relative h-2 m-4 ">
-        <img className="lg:h-40 h-36 rounded-md"
+        <img className="lg:h-40 h-32 rounded-md"
           src={src}
           alt={alt}
         />
@@ -33,7 +33,7 @@ export default function Cards({ src, title, subtitle, alt }) {
       </CardHeader>
 
       <CardBody>
-        <Typography variant="h5" color="white" className="mt-32 text-sm font-semibold flex justify-between">
+        <Typography variant="h5" color="white" className="lg:mt-32 mt-24 text-sm font-semibold flex justify-between">
           <div>{title}</div>
         </Typography>
         <Typography className="text-xs mt-2 text-zinc-400 font-medium truncate">

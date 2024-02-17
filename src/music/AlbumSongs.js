@@ -58,13 +58,13 @@ const AlbumSongs = () => {
         <div className="w-full h-100 bg-[#383838] p-10">
           <div className="lg:flex block">
             <img
-              className="mr-6 h-72 w-72 lg:mt-0 mt-2 rounded-full"
+              className="mr-6 lg:md:h-72 lg:md:w-72 h-52 w-52 lg:mt-0 mt-2 rounded-full"
               src={albumData.image}
               alt="image"
             />
             <div className="flex flex-col justify-center">
               {/* content */}
-              <h1 className="lg:mt-0 mt-2 mb-2 text-white text-6xl font-bold ">
+              <h1 className="lg:mt-0 mt-2 mb-2 text-white lg:md:text-6xl text-4xl font-bold ">
                 {albumData.title}
               </h1>
               <p className="text-gray-400 text-sm">Created by Mustafa Zaheer</p>

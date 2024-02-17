@@ -63,41 +63,39 @@ const ArtistDetails = () => {
 
             {/* button play list */}
             <div className='bg-[#121212] w-full'>
-                <div className="flex justify-start">
+                {/* <div className="flex justify-star"> */}
                     {/* <div className="flex"> */}
-                    <div className="mr-2 px-8 my-6">
-                        <Icon icon="icon-park-solid:play" style={{ color: '#1ED760' }} className='h-16 w-16 hover:scale-105' />
-                    </div>
+                    {/* <div className="lg:md:mr-2 px-8 my-6">
+                        <Icon icon="icon-park-solid:play" style={{ color: '#1ED760' }} className='h-14 w-16 hover:scale-105' />
+                    </div> */}
 
-                    <button className="mr-2 border border-slate-500 block  rounded-full ml-2 px-4 py-1 my-10 hover:scale-105 hover:border-white text-white font-semibold">Follow</button>
-                    {/* </div> */}
-                    {/* <div className="text-gray-600 text-sm tracking-widest text-right">
-                                </div> */}
-                </div>
+                    {/* <button className="mr-2 border border-slate-500 block  rounded-full lg:md:ml-2 px-4 py-1 my-10 hover:scale-105 lg:md:text-base text-sm hover:border-white text-white font-semibold">Follow</button> */}
+                {/* </div> */}
 
                 {/* Main song list */}
                 <div className="Songs ">
                     {/* song list header */}
-                    <div className="pl-10 text-white font-semibold text-lg">Popular</div>
+                    <div className="lg:md:pl-10 pl-5 pt-6 text-white font-semibold lg:md:text-xl text-lg">Popular</div>
 
-                    <div className="border-b text-zinc-400 border-gray-800 mt-3 ml-6 lg:ml-16 md:ml-6 mr-3 text-sm md:text-base flex justify-between">
+                    <div className="border-b text-zinc-400 border-gray-800 mt-3 ml-4 lg:ml-16 md:ml-6 mr-3 text-sm md:text-base flex justify-between">
                         <div className='flex gap-4 md:gap-7'>
                             <div class="p-2 w-1/6 md:w-full">#</div>
-                            <div class="p-2 w-5/6 lg:pl-3 md:pl-1 pl-6">Title</div>
+                            <div class="p-2 w-5/6 lg:pl-3 md:pl-1 pl-4">Title</div>
                         </div>
-                        <div class="pt-2 lg:pr-16 md:pr-8 pr-0 w-full text-right">Artist</div>
+                        <div class="pt-2 lg:pr-16 md:pr-8 pr-2 w-full text-right">Artist</div>
                         <div class="p-2 w-2/3 text-right lg:mr-7 mr-0">Favorite</div>
                     </div>
 
-                    <div className='lg:md:pl-16 pl-6 pt-4'>
+                    <div className='lg:md:pl-16 pl-3 pt-4'>
                         {artistData.songs.map((song, index) => (<>
                             <div key={song._id} className="flex border-b text-zinc-400 border-gray-800 hover:bg-zinc-800 group hover:text-white">
-                                {/* <div className='songs'> */}
-                                <span className="p-3 w-8 lg:md:mt-2 mt-5 flex-shrink-0">{index + 1}</span>
+                                <span className="p-3 w-8 lg:md:mt-2 mt-5 flex-shrink-0 lg:md:text-base text-sm">{index + 1}</span>
+
                                 <Icon icon="entypo:controller-play" width="4rem" height="4rem" style={{ color: '#72d95e' }} className='transform opacity-0 group-hover:opacity-100 mr-2 lg:mt-0 mt-2' onClick={() => { handlePlaySortedSong(song) }} />
-                                <img src={song.thumbnail} className="lg:h-14 h-16 mt-1.5 mb-1 rounded-md" alt={song.title} onClick={() => { handlePlaySortedSong(song) }} />
-                                <div className="p-3 lg:mt-2 mt-3 w-full" onClick={() => { handlePlaySortedSong(song) }}>{song.title}</div>
-                                <div className="p-3 lg:mt-2 mt-3 w-full" onClick={() => { handlePlaySortedSong(song) }}>{artistData.name}</div>
+
+                                <img src={song.thumbnail} className="lg:h-16 h-14 mt-1.5 mb-1 rounded-md" alt={song.title} onClick={() => { handlePlaySortedSong(song) }} />
+                                <div className="p-3 lg:mt-2 mt-2 w-full lg:md:text-base text-sm" onClick={() => { handlePlaySortedSong(song) }}>{song.title}</div>
+                                <div className="p-3 lg:mt-2 mt-2 w-full lg:md:text-base text-sm" onClick={() => { handlePlaySortedSong(song) }}>{artistData.name}</div>
                                 {/* </div>    */}
                                 {getUser && getUser.status == "success" && <div className='heart' onClick={() => addToLikedSongs(song._id)}>
                                     <Icon icon="ri:heart-line" width="1.5rem" height="1.5rem" style={{ color: '#808080' }} className='lg:md:mr-16 mr-9  mt-5 hover:scale-125 cursor-pointer' />

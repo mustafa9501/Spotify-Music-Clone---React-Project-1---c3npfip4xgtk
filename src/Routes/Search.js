@@ -84,11 +84,12 @@ const Search = () => {
   return (
     <>
    <div className="bg-neutral-900 lg:md:h-9/10 h-10/10 overflow-y-auto rounded-b-lg">
-   <div className="flex gap-4 ml-10">
+   <div className="flex lg:gap-4 gap-3 lg:ml-10 ml-7">
 
     <div className="text-white text-sm lg:ml-8 ml-0 mt-4 py-1.5 lg:px-3 px-2 rounded-3xl bg-zinc-800 hover:bg-zinc-700 cursor-pointer" onClick={() => { handleTabClick('All'); onClickAll() }}>All</div>
 
-    <Link to="/search/songs"><div className="text-white text-sm mt-4 rounded-3xl py-1.5  px-5 bg-zinc-800 hover:bg-zinc-700 cursor-pointer">Songs</div></Link>
+    <Link to="/search/songs">
+      <div className="text-white text-sm mt-4 rounded-3xl py-1.5  px-5 bg-zinc-800 hover:bg-zinc-700 cursor-pointer">Songs</div></Link>
 
     <div className="text-white text-sm mt-4  rounded-3xl py-1.5 px-4 bg-zinc-800 hover:bg-zinc-700 cursor-pointer" onClick={() => { handleTabClick('Artists'); onArtistClick(); }}>Artists</div>
 
@@ -105,7 +106,7 @@ const Search = () => {
       );
     })}
   </div>
-  <div className="lg:mt-12 mt-0">
+  <div className="lg:mt-12">
     <Footer />
   </div>
 </div>
