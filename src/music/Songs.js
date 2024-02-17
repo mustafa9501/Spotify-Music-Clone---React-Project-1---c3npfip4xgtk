@@ -77,7 +77,7 @@ const AlbumSongs = () => {
             {list.map((song, index) => (
               <div key={song._id} className="flex border-b text-zinc-400 border-gray-800 hover:bg-zinc-800 group hover:text-white">
 
-                <span className="p-3 md:w-8 mt-4 flex-shrink-0">{index + 1}</span>
+                <span className="p-3 md:w-8 mt-4 flex-shrink-0 lg:md:text-base text-sm">{index + 1}</span>
                 <Icon icon="entypo:controller-play" width="4rem" height="4rem" style={{ color: '#72d95e' }} className='transform opacity-0 group-hover:opacity-100 mr-3 lg:md:ml-2 pt-2' />
                 <img src={song.thumbnail} className="lg:md:h-16 h-14 mt-1.5 mb-1.5 rounded-md" alt={song.title} onClick={() => { handlePlaySong(song) }} />
                 <div className="p-2 mt-4 w-5/6 md:w-full lg:md:text-base text-sm" onClick={() => { handlePlaySong(song) }}>{song.title}</div>
