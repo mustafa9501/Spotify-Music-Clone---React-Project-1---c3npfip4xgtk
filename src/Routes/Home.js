@@ -108,7 +108,7 @@ const Home = () => {
   return (
     <>
       {/* This is content div */}
-      <div className="bg-neutral-900 lg:md:h-9/10 h-10/10 overflow-y-auto rounded-b-lg w-full">
+      <div className="bg-neutral-900 lg:md:h-9/10 h-9/11 overflow-y-auto rounded-b-lg w-full">
         <div className="text-white font-bold text-xl lg:ml-20 ml-6 mt-4">
           Spotify Albums
         </div>

@@ -38,7 +38,7 @@ const ArtistDetails = () => {
     }
 
     return (<>
-        <div className='lg:md:h-9/10 h-10/11 overflow-y-auto rounded-b-lg bg-neutral-900'>
+        <div className='lg:md:h-9/10 h-9/11 w-full overflow-y-auto rounded-b-lg bg-neutral-900'>
             {/* header */}
             <div className='lg:hidden fixed w-full bg-[#383838] text-white pl-4'>
                 <Icon icon="mingcute:arrow-left-fill" width="3rem" height="3rem" style={{ color: 'white' }} onClick={() => {
@@ -48,13 +48,13 @@ const ArtistDetails = () => {
 
             <div className='w-full h-100 bg-[#383838] lg:p-10 pt-12 pl-10 pb-2'>
                 <div className="lg:md:flex block ">
-                    <img className="mr-6 lg:mb-2 h-72 w-72 rounded-full" src={artistData.image} alt="image" />
+                    <img className="lg:mb-2 lg:h-72 lg:w-72 h-52 w-52 rounded-full" src={artistData.image} alt="image" />
                     <div className="flex flex-col justify-center">
                         {/* content */}
-                        <h4 className="text-gray-400 tracking-widest text-xs flex">
+                        <div className="text-gray-400 tracking-widest text-xs flex lg:pt-0 pt-1">
                             <Icon icon="solar:verified-check-bold" width="1.5rem" height="1.5rem" style={{ color: '#2791b4' }} />
-                            <h5 className='p-1 text-white'>Verified Artist</h5></h4>
-                        <h1 className="mt-0 mb-2 text-white text-6xl font-bold ">{artistData.name}</h1>
+                            <h5 className='p-1 text-white'>Verified Artist</h5></div>
+                        <h1 className="mt-0 mb-2 text-white lg:md:text-6xl text-3xl font-bold ">{artistData.name}</h1>
 
                         <p className="text-gray-400 text-sm">Created by Mustafa Zaheer</p>
                     </div>
@@ -62,7 +62,7 @@ const ArtistDetails = () => {
             </div>
 
             {/* button play list */}
-            <div className='bg-[#121212]'>
+            <div className='bg-[#121212] w-full'>
                 <div className="flex justify-start">
                     {/* <div className="flex"> */}
                     <div className="mr-2 px-8 my-6">

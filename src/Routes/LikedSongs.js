@@ -50,7 +50,7 @@ const LikedSongs = () => {
   };
 
   return (<>
-  <div className='lg:md:h-9/10 h-10/11 overflow-y-auto rounded-b-lg bg-neutral-900'>
+  <div className='lg:md:h-9/10 h-9/11 overflow-y-auto rounded-b-lg bg-neutral-900'>
 
     <div className='lg:hidden fixed w-full bg-[#3E2D78] text-white pl-4'>
          <Icon icon="mingcute:arrow-left-fill" width="3rem" height="3rem"  style={{color: 'white'}} onClick={() => {

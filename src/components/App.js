@@ -62,7 +62,7 @@ function AppContent() {
   return (
     <div className="lg:h-full h-full block">
          <ToastContainer />
-      <div className="flex lg:h-9/10 h-5/6 w-screen">
+      <div className="flex lg:h-10/10 h-4/5 w-screen">
         {!isCallingRoute && (
           <div className="lg:w-1/5 w-0 h-10/12">
             <Aside />
@@ -130,7 +130,7 @@ function AppContent() {
           </Routes>
         </div>
       </div>
-      <div className="w-screen lg:h-24 h-16 lg:p-4  bg-black">
+      <div className="w-screen lg:h-24 lg:p-4  bg-black">
         {!isCallingRoute && <AudioPlayer />}
       </div>
     </div>

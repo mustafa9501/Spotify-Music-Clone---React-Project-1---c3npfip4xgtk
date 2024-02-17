@@ -124,7 +124,7 @@ const Nav = () => {
           {location.pathname === "/search" && (
               <div className="flex justify-start group mr-2">
                 <input
-                  className="rounded-full border-2 mt-1.5 mb-1.5 p-2 lg:w-96 w-80 pl-12 text-sm font-semibold placeholder-neutral-600 hover:bg-neutral-700 bg-neutral-800 text-white"
+                  className="rounded-full border-2 mt-1.5 mb-1.5 p-2 lg:w-96 md:96 w-72 pl-12 text-sm font-semibold placeholder-neutral-600 hover:bg-neutral-700 bg-neutral-800 text-white"
                   type="text"
                   placeholder="What do you want to listen to?"
                   onChange={(e) => setSearchTerm(e.target.value)}
