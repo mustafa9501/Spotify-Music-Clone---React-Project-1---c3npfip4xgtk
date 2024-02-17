@@ -20,10 +20,10 @@ export default function Cards({ src, title, subtitle, alt }) {
 
   return (
 
-    <Card className="mt-6 w-48 bg-zinc-900 hover:bg-zinc-700 cursor-pointer ml-4 mr-2 drop-shadow-md overflow:visible group">
+    <Card className="mt-6 lg:w-48 w-40 bg-zinc-900 hover:bg-zinc-700 cursor-pointer ml-4 mr-2 drop-shadow-md overflow:visible group">
       {/* </div> */}
       <CardHeader color="blue-gray" className="relative h-2 m-4 ">
-        <img className="h-40 rounded-md"
+        <img className="lg:h-40 h-36 rounded-md"
           src={src}
           alt={alt}
         />

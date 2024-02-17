@@ -130,7 +130,7 @@ function AppContent() {
           </Routes>
         </div>
       </div>
-      <div className="w-screen h-24 p-4 bg-black">
+      <div className="w-screen lg:h-24 h-16 lg:p-4  bg-black">
         {!isCallingRoute && <AudioPlayer />}
       </div>
     </div>

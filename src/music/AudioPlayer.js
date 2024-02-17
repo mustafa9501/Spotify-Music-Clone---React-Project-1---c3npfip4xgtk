@@ -25,19 +25,20 @@ const AudioPlayer = () => {
     {!getUser && ( <>
       {isScreenSmall ? 
       <>
-       <div><ReactAudioPlayer
+       <div className=''><ReactAudioPlayer
        src={currentPlaying.audio_url}
        controls
        loop
        style={{ width: '100%', height: '40px', backgroundColor: 'black',}}
      /></div>
-      <div className='flex justify-between  items-center bg-[#AC2B98] p-2 mt-11  rounded-lg'>
+      <div className='flex justify-between  items-center bg-[#AC2B98] p-1.5 pl-2 mt-11'>
       <div className='font-semibold text-white '>
-        <p>Sign up free to get unlimited songs and podcasts with occasional ads..</p>
+        <p>Sign up free to get unlimited songs..</p>
       </div>
-      <Link to="/signup"><div className='font-semibold border bg-white rounded-3xl pl-4 pr-4 py-3 ml-3 mr-3 cursor-pointer'>Signup </div></Link>
-    </div> </>: 
-    <div className='flex justify-between  items-center bg-[#AC2B98]  p-3 mt-0 rounded'>
+      <Link to="/signup"><div className='font-semibold border bg-white rounded-3xl pl-4 pr-4 py-1.5 ml-3 mr-3 cursor-pointer'>Signup </div></Link>
+    </div>
+     </> : 
+    <div className='flex justify-between  items-center bg-[#AC2B98] p-3 mt-0 rounded'>
       <div className='font-semibold text-white '>
         <h3>Preview</h3>
         <p>Sign up to get unlimited songs and podcasts with occasional ads. No credit cards nedded.</p>
