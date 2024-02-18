@@ -73,12 +73,12 @@ const Home = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 2,
+    slidesToScroll: 3,
     responsive: [
       {
         breakpoint: 1100,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
 
         }
       },
@@ -129,7 +129,7 @@ const Home = () => {
         </Slider>
 
         {getUser && getUser.status === "success" && (<>
-          <div className="text-white font-bold text-xl lg:ml-20 ml-6">
+          <div className="text-white font-bold text-xl lg:ml-20 ml-6 lg:mt-2">
             Artists 
           </div>
           <Slider {...settings} className="xl:px-8 lg:px-8 md:px-4 sm:px-0 xl:ml-8 lg:ml-8 md:ml-4 sm:ml-0 mr-8 ">

@@ -33,6 +33,26 @@ const Signup = () => {
     })
   }
 
+  const onKeyClick = (event) => {
+    event.preventDefault();
+    if(event.key === 'Enter'){
+      const data = {email, password, name, appType: 'music' }
+    
+      axios.post("https://academics.newtonschool.co/api/v1/user/signup", data).then((response)=>{
+          console.log(response)
+          navigate('/login');
+      }).catch((error)=>{
+          console.log(error);
+          if(error.response && error.response.data && error.response.data.message){
+            setError(error.response.data.message)
+        }
+        else{
+            setError("Unknown error please try after sometime !!")
+        }
+      })
+    }  
+  }
+
   return (
     <div className="w-full h-fit-scren bg-black flex flex-col items-center">
       <div className="bg-black w-full flex items-center pl-10 p-6">
@@ -73,7 +93,8 @@ const Signup = () => {
           <button
             className="border rounded-full border-none bg-green-500 p-3 font-bold w-full mt-12 hover:bg-green-700 cursor-auto"
             onClick={onClickHandler}
-          >
+            onKeyDown={onKeyClick}
+           >
             Sign Up
           </button>
         </div>

@@ -15,27 +15,54 @@ const Login = () => {
   const {signInUser} = useUser();
   const navigate = useNavigate();
 
+  const onKeyHandler = (event) => {
+    event.preventDefault();
+
+    if(event.key === 'Enter'){
+      const data = { email, password, appType: "music" };
+      setError('');
+      axios
+        .post("https://academics.newtonschool.co/api/v1/user/login", data)
+        .then((response) => {
+          console.log(response.data);
+          localStorage.setItem('token', response.data.token);
+          signInUser({status:response.data.status,token:response.data.token})
+          navigate("/");
+        })
+        .catch((error) => {
+          console.log(error);
+          if(error.response && error.response.data && error.response.data.message){
+              setError(error.response.data.message)
+          }
+          else{
+              setError("Unknown error please try after sometime !!")
+          }
+        });
+    };
+  };
+
   const onClickHandler = (event) => {
     event.preventDefault();
-    const data = { email, password, appType: "music" };
-    setError('');
-    axios
-      .post("https://academics.newtonschool.co/api/v1/user/login", data)
-      .then((response) => {
-        console.log(response.data);
-        localStorage.setItem('token', response.data.token);
-        signInUser({status:response.data.status,token:response.data.token})
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error);
-        if(error.response && error.response.data && error.response.data.message){
-            setError(error.response.data.message)
-        }
-        else{
-            setError("Unknown error please try after sometime !!")
-        }
-      });
+
+      const data = { email, password, appType: "music" };
+      setError('');
+      axios
+        .post("https://academics.newtonschool.co/api/v1/user/login", data)
+        .then((response) => {
+          console.log(response.data);
+          localStorage.setItem('token', response.data.token);
+          signInUser({status:response.data.status,token:response.data.token})
+          navigate("/");
+        })
+        .catch((error) => {
+          console.log(error);
+          if(error.response && error.response.data && error.response.data.message){
+              setError(error.response.data.message)
+          }
+          else{
+              setError("Unknown error please try after sometime !!")
+          }
+        });
   };
 
   return (
@@ -70,7 +97,9 @@ const Login = () => {
             value={password}
             setValue={setPassword}
           />
-          <button className="border rounded-full border-none bg-green-500 p-3 font-bold w-full mt-12 hover:bg-green-700 cursor-auto" onClick={onClickHandler}>
+          <button className="border rounded-full border-none bg-green-500 p-3 font-bold w-full mt-12 hover:bg-green-700 cursor-auto"  
+           onKeyDown={onKeyHandler}
+           onClick={onClickHandler}>
             Log In
           </button>
         </div>
