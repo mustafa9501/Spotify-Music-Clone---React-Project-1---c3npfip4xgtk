@@ -94,7 +94,7 @@ const LikedSongs = () => {
             <div className="p-2 pl-4 mt-3.5 w-5/6 lg:md:text-base text-sm " onClick={() => { handlePlaySortedSong(song) }}>{song.title}</div>
             <div className="p-2 mt-2 w-full" onClick={() => { handlePlaySortedSong(song) }}>{song.artist[0].name}</div>
             <div className='disliked' onClick={() => removeLikedSongs(song._id)}>
-              <Icon icon="ph:heart-fill" width="1.5rem" height="1.5rem" style={{ color: '#1ED760' }} className='mr-16 mt-2 md:mt-5 hover:scale-125 cursor-pointer' />
+              <Icon icon="ph:heart-fill" width="1.5rem" height="1.5rem" style={{ color: '#1ED760' }} className='mr-16 mt-5 md:mt-5 hover:scale-125 cursor-pointer' />
             </div>
           </div>
         ))
