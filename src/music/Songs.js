@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useUser } from '../Routes/UserProvider';
 import { Icon } from '@iconify/react';
 import { useNavigate } from 'react-router-dom';
@@ -11,46 +11,72 @@ const AlbumSongs = () => {
   const { getUser, signOutUser, albumData } = useUser();
   const { setCurrentPlaying } = useUser();
   const [list, setList] = useState([]);
+  const [likedSongs, setLikedSongs] = useState([]);
 
   const navigate = useNavigate();
 
-  const onChangeHandler = () => {
-    localStorage.removeItem("token");
-    signOutUser();
-  };
+  // const onChangeHandler = () => {
+  //   localStorage.removeItem("token");
+  //   signOutUser();
+  // };
 
-  axios.get("https://academics.newtonschool.co/api/v1/music/song?limit=100")
-    .then((response) => {
-      // console.log("song", response.data.data);
-      setList(response.data.data);
-    })
-    .catch((error) => { console.log(error); });
+  useEffect(() => {
+    const storedLikedSongs = JSON.parse(localStorage.getItem('likedSongs')) || [];
+    setLikedSongs(storedLikedSongs);
+    
+    axios
+      .get('https://academics.newtonschool.co/api/v1/music/song?limit=100')
+      .then((response) => {
+        setList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const handlePlaySong = (song) => {
     setCurrentPlaying(song);
   };
 
-  const addToLikedSongs = (songId) => {
-    axios.patch('https://academics.newtonschool.co/api/v1/music/favorites/like', { "songId": songId }, {
-      headers: {
-        Authorization: `Bearer ${getUser.token}`
+  const addToLikedSongs = async (event, songId) => {
+    event.preventDefault();
+    try {
+      const response = await axios.patch(
+        'https://academics.newtonschool.co/api/v1/music/favorites/like',
+        { songId: songId },
+        {
+          headers: {
+            Authorization: `Bearer ${getUser.token}`,
+          },
+        }
+      );
+
+      if (response.data.message === 'song added to favorites successfully.') {
+        toast.success('Added to Liked Songs');
+        const updatedLikedSongs = [...likedSongs, songId];
+        setLikedSongs(updatedLikedSongs);
+        // Save liked songs to local storage
+        localStorage.setItem('likedSongs', JSON.stringify(updatedLikedSongs));
+      } else if (response.data.message === 'song removed from favorites successfully.') {
+        toast.success('Removed from Liked Songs');
+        const updatedLikedSongs = likedSongs.filter((id) => id !== songId);
+        setLikedSongs(updatedLikedSongs);
+        // Save liked songs to local storage
+        localStorage.setItem('likedSongs', JSON.stringify(updatedLikedSongs));
       }
-    }).then((response) => {
-      console.log(response);
-      toast.success("Added to Liked Songs");
-    }).catch((error) => {
+    } catch (error) {
       console.log(error);
-    })
-  }
+    }
+  };
 
   return (<>
     {/* body part */}
     <div className='lg:md:h-9/10 h-9/11 overflow-y-auto rounded-b-lg bg-neutral-900'>
-    
+
       <div className='lg:hidden fixed w-full bg-[#121212] text-white pl-4'>
-         <Icon icon="mingcute:arrow-left-fill" width="3rem" height="3rem"  style={{color: 'white'}} onClick={() => {
-         navigate(-1);
-         }}/>
+        <Icon icon="mingcute:arrow-left-fill" width="3rem" height="3rem" style={{ color: 'white' }} onClick={() => {
+          navigate(-1);
+        }} />
       </div>
 
       <div className='w-full lg:h-48 h-36 bg-[#121212] lg:flex block justify-start items-center p-4 lg:mt-0 mt-9 md:p-10 '>
@@ -82,11 +108,28 @@ const AlbumSongs = () => {
                 <img src={song.thumbnail} className="lg:md:h-16 h-14 mt-1.5 mb-1.5 rounded-md" alt={song.title} onClick={() => { handlePlaySong(song) }} />
                 <div className="p-2 mt-4 w-5/6 md:w-full lg:md:text-base text-sm" onClick={() => { handlePlaySong(song) }}>{song.title}</div>
                 <div className="p-2 mt-4 w-full md:w-5/6 lg:md:text-base text-sm" onClick={() => { handlePlaySong(song) }}>{song.artist[0].name}</div>
-                {getUser && getUser.status === "success" && (
-                  <div className='heart' onClick={() => addToLikedSongs(song._id)}>
-                    <Icon icon="ri:heart-line" width="1.5rem" height="1.5rem" style={{ color: '#808080' }} className='mr-7 lg:md:mr-16 mt-6 hover:scale-125 cursor-pointer' />
-                  </div>
-                )}
+               
+                {getUser && getUser.status === 'success' && (
+                    <div className='heart' onClick={(event) => addToLikedSongs(event, song._id)}>
+                      {likedSongs.includes(song._id) ? (
+                        <Icon
+                          icon='ri:heart-fill'
+                          width='1.5rem'
+                          height='1.5rem'
+                          style={{ color: '#0aa324' }}
+                          className='mr-7 lg:md:mr-16 mt-6 hover:scale-125 cursor-pointer'
+                        />
+                      ) : (
+                        <Icon
+                          icon='ri:heart-line'
+                          width='1.5rem'
+                          height='1.5rem'
+                          style={{ color: '#808080' }}
+                          className='mr-7 lg:md:mr-16 mt-6 hover:scale-125 cursor-pointer'
+                        />
+                      )}
+                    </div>
+                  )}          
               </div>
             ))}
           </div>

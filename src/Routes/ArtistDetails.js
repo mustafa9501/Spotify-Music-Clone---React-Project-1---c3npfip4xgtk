@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUser } from "./UserProvider";
 import axios from 'axios';
 import { Icon } from '@iconify/react';
@@ -9,14 +9,13 @@ import { toast } from "react-toastify";
 
 const ArtistDetails = () => {
 
-    const { getUser, signOutUser, setArtistData } = useUser();
-    const { artistData } = useUser();
-    const { setCurrentPlaying } = useUser();
+    const { getUser, setCurrentPlaying, artistData } = useUser();
+    const [likedSongs, setLikedSongs] = useState([]);
 
-    const onChangeHandler = () => {
-        localStorage.removeItem("token");
-        signOutUser();
-    };
+    useEffect(() => {
+        const storedLikedSongs = JSON.parse(localStorage.getItem('likedSongs')) || [];
+        setLikedSongs(storedLikedSongs);
+    }, []);
 
     const navigate = useNavigate();
 
@@ -24,18 +23,36 @@ const ArtistDetails = () => {
         setCurrentPlaying(song);
     };
 
-    const addToLikedSongs = (songId) => {
-        axios.patch('https://academics.newtonschool.co/api/v1/music/favorites/like', { "songId": songId }, {
-            headers: {
-                Authorization: `Bearer ${getUser.token}`
+    const addToLikedSongs = async (event, songId) => {
+        event.preventDefault();
+        try {
+            const response = await axios.patch(
+                'https://academics.newtonschool.co/api/v1/music/favorites/like',
+                { songId: songId },
+                {
+                    headers: {
+                        Authorization: `Bearer ${getUser.token}`,
+                    },
+                }
+            );
+
+            if (response.data.message === 'song added to favorites successfully.') {
+                toast.success('Added to Liked Songs');
+                const updatedLikedSongs = [...likedSongs, songId];
+                setLikedSongs(updatedLikedSongs);
+                // Save liked songs to local storage
+                localStorage.setItem('likedSongs', JSON.stringify(updatedLikedSongs));
+            } else if (response.data.message === 'song removed from favorites successfully.') {
+                toast.success('Removed from Liked Songs');
+                const updatedLikedSongs = likedSongs.filter((id) => id !== songId);
+                setLikedSongs(updatedLikedSongs);
+                // Save liked songs to local storage
+                localStorage.setItem('likedSongs', JSON.stringify(updatedLikedSongs));
             }
-        }).then((response) => {
-            console.log(response);
-            toast.success("Added to Liked Songs");
-        }).catch((error) => {
+        } catch (error) {
             console.log(error);
-        })
-    }
+        }
+    };
 
     return (<>
         <div className='lg:md:h-9/10 h-9/11 w-full overflow-y-auto rounded-b-lg bg-neutral-900'>
@@ -63,14 +80,6 @@ const ArtistDetails = () => {
 
             {/* button play list */}
             <div className='bg-[#121212] w-full'>
-                {/* <div className="flex justify-star"> */}
-                    {/* <div className="flex"> */}
-                    {/* <div className="lg:md:mr-2 px-8 my-6">
-                        <Icon icon="icon-park-solid:play" style={{ color: '#1ED760' }} className='h-14 w-16 hover:scale-105' />
-                    </div> */}
-
-                    {/* <button className="mr-2 border border-slate-500 block  rounded-full lg:md:ml-2 px-4 py-1 my-10 hover:scale-105 lg:md:text-base text-sm hover:border-white text-white font-semibold">Follow</button> */}
-                {/* </div> */}
 
                 {/* Main song list */}
                 <div className="Songs ">
@@ -87,7 +96,8 @@ const ArtistDetails = () => {
                     </div>
 
                     <div className='lg:md:pl-16 pl-3 pt-4'>
-                        {artistData.songs.map((song, index) => (<>
+                        {artistData.songs && artistData.songs.map((song, index) => (
+                        <>
                             <div key={song._id} className="flex border-b text-zinc-400 border-gray-800 hover:bg-zinc-800 group hover:text-white">
                                 <span className="p-3 w-8 lg:md:mt-2 mt-5 flex-shrink-0 lg:md:text-base text-sm">{index + 1}</span>
 
@@ -97,14 +107,32 @@ const ArtistDetails = () => {
                                 <div className="p-3 lg:mt-2 mt-2 w-full lg:md:text-base text-sm" onClick={() => { handlePlaySortedSong(song) }}>{song.title}</div>
                                 <div className="p-3 lg:mt-2 mt-2 w-full lg:md:text-base text-sm" onClick={() => { handlePlaySortedSong(song) }}>{artistData.name}</div>
                                 {/* </div>    */}
-                                {getUser && getUser.status == "success" && <div className='heart' onClick={() => addToLikedSongs(song._id)}>
-                                    <Icon icon="ri:heart-line" width="1.5rem" height="1.5rem" style={{ color: '#808080' }} className='lg:md:mr-16 mr-9  mt-5 hover:scale-125 cursor-pointer' />
+
+                                {getUser && getUser.status == "success" && <div className='heart' onClick={(event) => addToLikedSongs(event, song._id)}>
+                                    {likedSongs.includes(song._id) ? (
+                                        <Icon
+                                            icon='ri:heart-fill'
+                                            width='1.5rem'
+                                            height='1.5rem'
+                                            style={{ color: '#0aa324' }}
+                                            className='mr-7 lg:md:mr-16 mt-6 hover:scale-125 cursor-pointer'
+                                        />
+                                    ) : (
+                                        <Icon
+                                            icon='ri:heart-line'
+                                            width='1.5rem'
+                                            height='1.5rem'
+                                            style={{ color: '#808080' }}
+                                            className='mr-7 lg:md:mr-16 mt-6 hover:scale-125 cursor-pointer'
+                                        />
+                                    )}
                                 </div>}
+
                             </div>
                         </>
                         ))}
                     </div>
-                    {/* Add more song entries as needed */}
+
                 </div>
             </div>
             {/* footer */}
@@ -112,13 +140,7 @@ const ArtistDetails = () => {
                 <Footer />
             </div>
         </div>
-        {/* </div> */}
-        {/* </div> */}
-        {/* Audio player */}
-        {/* <div className="w-screen h-24 p-4 bg-black">
-                <AudioPlayer />
-             </div> */}
-        {/* </div> */}
+
     </>
     );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { useUser } from "../Routes/UserProvider";
 import { Icon } from "@iconify/react";
@@ -7,41 +7,52 @@ import Footer from "../Routes/Footer";
 import { toast } from "react-toastify";
 
 const AlbumSongs = () => {
-  const { getUser, signOutUser, albumData } = useUser();
+  const { getUser, albumData, setCurrentPlaying, artistData } = useUser();
   console.log(albumData);
-  const { artistData } = useUser();
-  const { setCurrentPlaying } = useUser();
+  const [likedSongs, setLikedSongs] = useState([]);
   console.log(artistData)
 
-  const onChangeHandler = () => {
-    localStorage.removeItem("token");
-    signOutUser();
-  };
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedLikedSongs = JSON.parse(localStorage.getItem('likedSongs')) || [];
+    setLikedSongs(storedLikedSongs);
+  }, []);
 
   const handlePlaySortedSong = (song) => {
     setCurrentPlaying(song);
   };
 
-  const addToLikedSongs = (songId) => {
-    axios
-      .patch(
-        "https://academics.newtonschool.co/api/v1/music/favorites/like",
+  const addToLikedSongs = async (event, songId) => {
+    event.preventDefault();
+    try {
+      const response = await axios.patch(
+        'https://academics.newtonschool.co/api/v1/music/favorites/like',
         { songId: songId },
         {
           headers: {
             Authorization: `Bearer ${getUser.token}`,
           },
         }
-      )
-      .then((response) => {
-        console.log(response);
-        toast.success("Added to Liked Songs");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      );
+
+      if (response.data.message === 'song added to favorites successfully.') {
+        toast.success('Added to Liked Songs');
+        const updatedLikedSongs = [...likedSongs, songId];
+        setLikedSongs(updatedLikedSongs);
+        // Save liked songs to local storage
+        localStorage.setItem('likedSongs', JSON.stringify(updatedLikedSongs));
+      } else if (response.data.message === 'song removed from favorites successfully.') {
+        toast.success('Removed from Liked Songs');
+        const updatedLikedSongs = likedSongs.filter((id) => id !== songId);
+        setLikedSongs(updatedLikedSongs);
+        // Save liked songs to local storage
+        localStorage.setItem('likedSongs', JSON.stringify(updatedLikedSongs));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -101,7 +112,7 @@ const AlbumSongs = () => {
               <div class="p-2 w-full text-right lg:mr-10 mr-8">Favorite</div>
             </div>
             <div className="lg:pl-16 pl-10 pt-4">
-              {albumData.songs.map((song, index) => (
+              {albumData.songs && albumData.songs.map((song, index) => (
                 <div
                   key={song._id}
                   className="flex border-b text-zinc-400 border-gray-800 hover:bg-zinc-800 group hover:text-white"
@@ -136,15 +147,25 @@ const AlbumSongs = () => {
                   {getUser && getUser.status == "success" && (
                     <div
                       className="heart"
-                      onClick={() => addToLikedSongs(song._id)}
+                      onClick={(event) => addToLikedSongs(event, song._id)}
                     >
-                      <Icon
-                        icon="ri:heart-line"
-                        width="1.5rem"
-                        height="1.5rem"
-                        style={{ color: "#808080" }}
-                        className="mr-16 mt-5 hover:scale-125 cursor-pointer"
-                      />
+                      {likedSongs.includes(song._id) ? (
+                        <Icon
+                          icon='ri:heart-fill'
+                          width='1.5rem'
+                          height='1.5rem'
+                          style={{ color: '#0aa324' }}
+                          className='mr-7 lg:md:mr-16 mt-6 hover:scale-125 cursor-pointer'
+                        />
+                      ) : (
+                        <Icon
+                          icon='ri:heart-line'
+                          width='1.5rem'
+                          height='1.5rem'
+                          style={{ color: '#808080' }}
+                          className='mr-7 lg:md:mr-16 mt-6 hover:scale-125 cursor-pointer'
+                        />
+                      )}
                     </div>
                   )}
                 </div>
@@ -158,13 +179,7 @@ const AlbumSongs = () => {
           <Footer />
         </div>
       </div>
-      {/* </div> */}
-      {/* </div> */}
-      {/* Audio player */}
-      {/* <div className="w-screen h-24 p-4 bg-black">
-                        <AudioPlayer />
-                    </div> */}
-      {/*  </div>    */}
+
     </>
   );
 };

@@ -61,9 +61,9 @@ const Aside = () => {
         <>
           <div className="bg-neutral-900 rounded-lg w-64 h-1/4 p-2 m-2">
             {/* This div is for logo */}
-            <div className="pt-2 cursor-pointer pb-0 pl-3.5">
+            <Link to='/'><div className="pt-2 cursor-pointer pb-0 pl-3.5">
               <img src={spotify_logo} alt="spotify logo" width={80} />
-            </div>
+            </div></Link>
             <div className="text-zinc-400 cursor-pointer hover:text-white">
               <Link to="/">
                 <IconText
@@ -108,17 +108,17 @@ const Aside = () => {
                 </Link>
               </div>
             )}
-            <div className="flex justify-between text-xs text-zinc-400 mt-20 cursor-pointer pl-2.5 font-medium">
+            <div className="flex justify-between text-xs text-zinc-400 mt-20 cursor-not-allowed pl-2.5 font-medium">
               <h5>Legal</h5>
               <h5>Privacy Center</h5>
               <h5>Privacy Policy</h5>
             </div>
-            <div className="flex justify-between text-xs text-zinc-400 mt-5 cursor-pointer pl-2.5 font-medium">
+            <div className="flex justify-between text-xs text-zinc-400 mt-5 cursor-not-allowed pl-2.5 font-medium">
               <h5>Cookies</h5>
               <h5>About Ads</h5>
               <h5>Accessibility</h5>
             </div>
-            <div className="flex text-xs text-zinc-400 mt-5 cursor-pointer pl-2.5 font-medium">
+            <div className="flex text-xs text-zinc-400 mt-5 cursor-not-allowed pl-2.5 font-medium">
               <h5>Cookies</h5>
             </div>
             <Link to="/comingsoon">

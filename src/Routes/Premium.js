@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Nav from './Nav';
 import { Link } from 'react-router-dom';
 import spotify_logo from "../assets/images/spotify_logo_white.svg";
@@ -7,6 +7,18 @@ import NavButton from '../InputComponent/shared/NavButton';
 
 const Premium = () => {
   const { getUser } = useUser();
+  const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1100);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsScreenSmall(window.innerWidth < 1100);
+    };
+
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
   const onChangeHandler=()=>{
     localStorage.removeItem("token");
     signOutUser();
@@ -15,6 +27,11 @@ const Premium = () => {
   return (
     <div className='bg-blue-600
      h-screen w-full'>
+      {isScreenSmall ? 
+      ( <div className='bg-black'>
+      <Link to='/'><img src={spotify_logo} alt="spotify logo" width={140} className='p-4' /></Link>
+      </div>
+      ) : (
         <div className='w-full bg-zinc-900 flex items-center pl-8'>
         <Link to='/'><img src={spotify_logo} alt="spotify logo" width={140} /></Link>
             
@@ -41,7 +58,8 @@ const Premium = () => {
           </div></Link>}
           </div>
           </div>
-        </div> 
+        </div> )}
+
         <div className='text-white felx-col'>
             <h2 className='font-bold  text-center text-4xl mt-40'>Get Premium free for 1 month</h2>
             <h3 className='text-center mt-8 text-lg'>Just ₹119/month after. Debit and credit cards accepted. Canel anytime.</h3>

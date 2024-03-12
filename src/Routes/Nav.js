@@ -105,7 +105,7 @@ const Nav = () => {
 
                 <li className="text-3xl pt-8">--</li>
                 <Link to="/premium"><li className="text-xl pt-8">Premium</li></Link>
-                <Link to="/"><li className="text-xl pt-4">Help</li></Link>
+                {/* <Link to="/"><li className="text-xl pt-4">Help</li></Link> */}
                 <Link to="/download"><li className="text-xl pt-4">Download</li></Link>
                 <Link to="/support"><li className="text-xl pt-4">Support</li></Link>                
               </ul>
@@ -241,9 +241,6 @@ const Nav = () => {
                   <button
                     type="button"
                     className="relative flex justify-center items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 h-8 w-8 m-5"
-                    id="user-menu-button"
-                    aria-expanded="false"
-                    aria-haspopup="true"
                     onClick={() => setDropdownOpen(!dropdownOpen)}>
                     <Icon
                       icon="carbon:user-filled"

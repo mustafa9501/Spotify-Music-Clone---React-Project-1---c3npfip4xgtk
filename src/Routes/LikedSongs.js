@@ -33,7 +33,7 @@ const LikedSongs = () => {
     }).then((response) => {
       // console.log(response)
       setList(response.data.data.songs)
-      toast.success('Removed form Liked Songs')
+      toast.success('Removed from Liked Songs')
       detailsOfLikedSongs();
       // window.
     }).catch((error) => {
